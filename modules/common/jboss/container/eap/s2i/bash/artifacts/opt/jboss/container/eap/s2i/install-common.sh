@@ -77,7 +77,11 @@ function configure_drivers(){
       done
 
       if [ -n "$drivers" ]; then
-        sed -i "s|<!-- ##DRIVERS## -->|${drivers}<!-- ##DRIVERS## -->|" $CONFIG_FILE
+        if [ -f "$CONFIG_FILE" ]; then
+            sed -i "s|<!-- ##DRIVERS## -->|${drivers}<!-- ##DRIVERS## -->|" $CONFIG_FILE
+        else
+            echo "$CONFIG_FILE does not exist"
+        fi
       fi
     fi
   )
